@@ -34,8 +34,10 @@ Description files MUST have some number of lines in the following format: `(HH:)
 ```
 
 ```sh
+cd mixes
 yt-dlp -x --audio-format mp3 --write-description "the url to your video and/or playlist"
-python split_mix_into_songs.py
+# wait for the downloads to complete... then:
+python ../split_mix_into_songs.py
 ```
 
 You can also do a dry run by editing the line `dry_run=True`.
