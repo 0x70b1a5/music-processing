@@ -6,6 +6,7 @@ I like to download music mixes, but I don't like listening to songs in the same 
 
 - FFmpeg
 - yt-dlp
+- shutil
 
 ## Usage
 
