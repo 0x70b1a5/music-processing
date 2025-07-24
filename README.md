@@ -2,19 +2,12 @@
 
 I like to download music mixes, but I don't like listening to songs in the same order over and over. Most uploaders include song timestamps in their videos, so I wrote this tool to split the single long playlist file into the individual songs. It's not perfect because timestamps are at most precise to 1 second intervals, but it's good enough.
 
-## Dependencies
-
-- FFmpeg
-- yt-dlp
-- shutil
-
 ## Usage
 
 You need the following directory structure: 
 
 ```
 music-processing
-|-- split_mix_into_songs.py
 |-- mixes # unprocessed mix audio
 |-- songs # individual songs will go here
 |-- processed # processed audio will go here
@@ -37,7 +30,8 @@ Description files MUST have some number of lines in the following format: `(HH:)
 cd mixes
 yt-dlp -x --audio-format mp3 --write-description "the url to your video and/or playlist"
 # wait for the downloads to complete... then:
-python ../split_mix_into_songs.py
+npm run build
+npm run start
 ```
 
-You can also do a dry run by editing the line `dry_run=True`.
+You can also do a dry run by passing `-- --dry-run.`

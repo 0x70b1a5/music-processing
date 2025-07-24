@@ -1,0 +1,20 @@
+{
+  "name": "music-processing",
+  "version": "1.0.0",
+  "description": "Audio mix splitting tool",
+  "main": "dist/split-mix-into-songs.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/split-mix-into-songs.js",
+    "dev": "ts-node src/split-mix-into-songs.ts"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
