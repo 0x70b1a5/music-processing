@@ -92,6 +92,9 @@ async function splitAudio(
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
+  // Track filenames to handle duplicates
+  const usedFilenames = new Set<string>();
+
   for (let i = 0; i < timestamps.length; i++) {
     const { start, artist, title } = timestamps[i];
     const cleanArtist = artist.replace(/[/\\]/g, '');
@@ -101,7 +104,23 @@ async function splitAudio(
       ? timeToSeconds(timestamps[i + 1].start) 
       : duration;
 
-    const outputFile = path.join(outputDir, `${cleanArtist} - ${cleanTitle} (${i}).mp3`);
+    // Generate filename with track number
+    const trackNumber = String(i + 1).padStart(2, '0');
+    let baseFilename = `${trackNumber} ${cleanArtist} - ${cleanTitle}`;
+    let outputFile: string;
+    
+    // Check for duplicates and add counter only if needed
+    if (usedFilenames.has(baseFilename)) {
+      let counter = 2;
+      do {
+        outputFile = path.join(outputDir, `${baseFilename} (${counter}).mp3`);
+        counter++;
+      } while (fs.existsSync(outputFile) || usedFilenames.has(path.basename(outputFile, '.mp3')));
+      usedFilenames.add(path.basename(outputFile, '.mp3'));
+    } else {
+      outputFile = path.join(outputDir, `${baseFilename}.mp3`);
+      usedFilenames.add(baseFilename);
+    }
     
     if (fs.existsSync(outputFile)) {
       console.log(`!! [E] File already exists: ${outputFile}`);
